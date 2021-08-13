@@ -1,3 +1,6 @@
+#include <iostream>
+
+
 template <typename T>
 class BinaryTreeNode {
     public:
@@ -8,7 +11,7 @@ class BinaryTreeNode {
     BinaryTreeNode(T data){
         this-> data = data;
         left = NULL; // garbage store hoga isiliye null
-        rightt = NULL;
+        right = NULL;
     }
 
     // yaha we want har node jaate jaate apne left aur right child ko bhi dlt kare

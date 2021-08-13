@@ -617,7 +617,7 @@ int getLeafNodeCount(TreeNode<int>* root) {
 
 # Pre order Traversal
 
-**PREORDER TRAVERSAL** : pehle print root then it's children
+**PREORDER TRAVERSAL** : pehle print root then it's children  
 
 
 ```C++
