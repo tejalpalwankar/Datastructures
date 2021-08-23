@@ -7,46 +7,63 @@
 // #include "binaryTreeClass.h"
 using namespace std;
 
-/* 
-BinaryTreeNode<int>* takeInputLevelWise(){
+BinaryTreeNode<int>* takeInput(){
     int rootData ;
-    cout << " Enter root Data :" << endl;
+    cout << " Enter Data :" << endl;
     cin >> rootData;
     if(rootData == -1){
         return NULL;
     }
 
     BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
-   
-   queue<BinaryTreeNode<int>*> pendingNodes;
-   pendingNodes.push(root);
-
-   while(pendingNodes.size() != NULL){
-       BinaryTreeNode<int>* front = pendingNodes.front();
-       pendingNodes.pop();
-
-       cout << "Enter left child of " << front->data << endl;
-       int leftChildData;
-       cin >> leftChildData;
-       if(leftChildData != -1){
-           BinaryTreeNode<int>* child = new BinaryTreeNode<int>(leftChildData);
-           front->left = child;
-           pendingNodes.push(child);
-       }
-
-       cout << "Enter right child of " << front->data << endl;
-       int rightChildData;
-       cin >> rightChildData;
-       if(rightChildData != -1){
-           BinaryTreeNode<int>* child = new BinaryTreeNode<int>(rightChildData);
-           front->right = child;
-           pendingNodes.push(child);
-       }
-
-   }
+    BinaryTreeNode<int>* leftChild = takeInput();
+    BinaryTreeNode<int>* rightChild = takeInput();
+    
+    root->left = leftChild;
+    root->right = rightChild;
 
     return root;
 }
+
+// BinaryTreeNode<int>* takeInputLevelWise(){
+//     int rootData ;
+//     cout << " Enter root Data :" << endl;
+//     cin >> rootData;
+//     if(rootData == -1){
+//         return NULL;
+//     }
+
+//     BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
+   
+//    queue<BinaryTreeNode<int>*> pendingNodes;
+//    pendingNodes.push(root);
+
+//    while(pendingNodes.size() != NULL){
+//        BinaryTreeNode<int>* front = pendingNodes.front();
+//        pendingNodes.pop();
+
+//        cout << "Enter left child of " << front->data << endl;
+//        int leftChildData;
+//        cin >> leftChildData;
+//        if(leftChildData != -1){
+//            BinaryTreeNode<int>* child = new BinaryTreeNode<int>(leftChildData);
+//            front->left = child;
+//            pendingNodes.push(child);
+//        }
+
+//        cout << "Enter right child of " << front->data << endl;
+//        int rightChildData;
+//        cin >> rightChildData;
+//        if(rightChildData != -1){
+//            BinaryTreeNode<int>* child = new BinaryTreeNode<int>(rightChildData);
+//            front->right = child;
+//            pendingNodes.push(child);
+//        }
+
+//    }
+
+//     return root;
+// }
 
 void printLevelWise(BinaryTreeNode<int> *root) {
 	// Write your code here
@@ -79,6 +96,7 @@ void printLevelWise(BinaryTreeNode<int> *root) {
         cout << endl;
     }
 }
+/* 
 
 void elementsInRangeK1K2(BinaryTreeNode<int>* root, int k1, int k2) {
 	// Write your code here
@@ -227,11 +245,11 @@ vector<int>* getRootToNodePath(BinaryTreeNode<int>* root, int data){
 // 4 2 6 1 3 5 -1 -1 -1 -1 -1 -1 -1 -1 isbst
 // 4 2 6 1 30 5 -1 -1 -1 -1 -1 -1 -1 -1 is not bst
 int main(){
-    // BinaryTreeNode<int>* root = takeInputLevelWise();
+    BinaryTreeNode<int>* root = takeInput();
     // elementsInRangeK1K2(root, 6,9);
     // cout << isBST(root) << endl;
     // cout << isBST3(root) << endl;
-    // printLevelWise(root);
+    printLevelWise(root);
     // int n = 7;
     // int arr[] = {1 ,2, 3,4,5,6,7};
     // constructTree(arr,7);
@@ -242,12 +260,12 @@ int main(){
     // delete output;
     // delete root;
 
-    BST b;
-    b.insert(10);
-    b.insert(5);
-    b.insert(20);
-    b.insert(7);
-    b.insert(3);
-    b.insert(15);
-    b.printTree();
+    // BST b;
+    // b.insert(10);
+    // b.insert(5);
+    // b.insert(20);
+    // b.insert(7);
+    // b.insert(3);
+    // b.insert(15);
+    // b.printTree();
 }
