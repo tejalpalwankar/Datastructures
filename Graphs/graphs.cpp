@@ -180,6 +180,39 @@ vector<int> *getPathBFS(int **edges, int n, int sv, int ev)
     }
 }
 
+vector<int>* printConnectedHelper(int** edges , int n , int sv , bool* visited){
+    vector<int>* smallop;
+    visited[sv] = true;
+    for(int i =0 ; i < n ; i++){
+        if(edges[sv][i] && !visited[i]){
+            smallop->push_back(i);
+            visited[i]= true;
+        }
+    }
+    return smallop;
+}
+
+vector<vector<int>>* printConnected(int** edges , int n , int sv ){
+    vector<vector<int>>* ans;
+    bool *visited = new bool[n];
+    for (int i = 0; i < n; i++)
+    {
+        visited[i] = false;
+    }
+
+ ;
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i])
+            {
+                vector<int>* component = printConnectedHelper(edges ,n , i , visited);
+				ans->push_back(component);
+            }
+        }
+
+    return ans;
+}
+
 int main()
 {
     int n;
@@ -217,22 +250,34 @@ int main()
     // cout << "BFS " << endl;
     // BFS(edges, n);
 
-    cout << "enter 1st and last vertex" << endl;
-    int sv, ev;
-    cin >> sv >> ev;
-    vector<int> *output = getPathBFS(edges, n, sv, ev);
+    // cout << "enter 1st and last vertex" << endl;
+    // int sv, ev;
+    // cin >> sv >> ev;
+    // vector<int> *output = getPathBFS(edges, n, sv, ev);
+    // if (output != NULL)
+    // {
+    //     cout << "path :" << endl;
+    //     for (int i = 0; i < output->size(); i++)
+    //     {
+    //         cout << output->at(i) << " ";
+    //     }
+    //     delete output;
+    // }
+    // else
+    // {
+    //     cout << " No path found" << endl;
+    // }
+
+        vector<vector<int>>* output = printConnected(edges, n, 0);
     if (output != NULL)
     {
-        cout << "path :" << endl;
         for (int i = 0; i < output->size(); i++)
         {
-            cout << output->at(i) << " ";
+            for(int j = 0 ; j < output[i]->size() ; i++){
+            cout << output[i][j] << " ";
         }
-        delete output;
-    }
-    else
-    {
-        cout << " No path found" << endl;
+            cout << endl;
+        }
     }
 
     //delete everything

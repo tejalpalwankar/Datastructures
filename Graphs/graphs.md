@@ -502,7 +502,101 @@ bool DFS(int **edges, int n, int sv)
 if we have 3 connected componenets , we have total output in that we have other components. 
 Initially we will go to the 1st connected component and print it.Once we are done w that , everything . Pass the vector with it. 
 
+```C++ 
+#include <iostream>
+#include <vector>
+#include<algorithm>
+using namespace std;
 
+
+void printConnectedHelper(int** edges , int n , int sv , bool* visited,vector<int> &smallop){
+    //vector<int>* smallop;
+    visited[sv] = true;
+    smallop.push_back(sv);
+    for(int i =0 ; i < n ; i++){
+        if(edges[sv][i] && !visited[i]){
+            //smallop.push_back(i);
+            visited[i]= true;
+            printConnectedHelper(edges,n,i,visited,smallop);
+        }
+    }
+    //return smallop;
+}
+
+
+
+vector<vector<int>> printConnected(int** edges , int n  ){
+    vector<vector<int>> ans;
+    bool *visited = new bool[n];
+    for (int i = 0; i < n; i++)
+    {
+        visited[i] = false;
+    }
+
+ 
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i])
+            {
+                vector<int> component;
+                printConnectedHelper(edges ,n,i,visited,component);
+                sort(component.begin(),component.end());
+				ans.push_back(component);
+            }
+        }
+
+    return ans;
+}
+
+
+int main()
+{
+    int n;
+    int e;
+    cin >> n >> e;
+    int **edges = new int *[n];
+    // creating a 2D matrix and initializing it by 0
+    for (int i = 0; i < n; i++)
+    {
+        edges[i] = new int[n];
+        //to remove the garbage vals
+        for (int j = 0; j < n; j++)
+        {
+            edges[i][j] = 0;
+        }
+    }
+
+    // taking input the edges and putting them in the matrix
+    for (int i = 0; i < e; i++)
+    {
+        int f, s; // f -first vertex , s- second vertex
+        cin >> f >> s;
+        edges[f][s] = 1; // denoting we have a edge
+        edges[s][f] = 1; // (0,1) and (1,0) dono edges honge
+    }
+
+
+    vector<vector<int>> output = printConnected(edges, n);
+    
+        for (int i = 0; i < output.size(); i++)
+        {
+            for(int j = 0 ; j < output[i].size() ; j++){
+            cout<<output[i][j]<<" ";
+        }
+            cout<<endl;
+        }
+    
+
+
+    //delete everything
+
+//     for (int i = 0; i < n; i++)
+//     {
+//         delete[] edges[i];
+//     }
+//     delete[] edges;
+}
+```
 
 # Directed Graphs
 This graph has  a specific direction. Like it can go fro A to B , but it cannot go from B to A. Example : one way roads.So humare edges mai  
