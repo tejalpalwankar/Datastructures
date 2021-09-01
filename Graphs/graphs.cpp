@@ -213,11 +213,45 @@ vector<vector<int>>* printConnected(int** edges , int n , int sv ){
     return ans;
 }
 
+void printCountHelper(int **edges , int n , int sv ,int* visited){
+    visited[sv] = true;
+
+    for(int i = 0 ; i < n ; i++){
+        if(!visited[i] && edges[sv][i] == 1){
+            printCountHelper(edges , n , i , visited);
+        }
+    }
+}
+
+int printCount(int **edges, int n){
+
+    int *visited = new int[n];
+
+    for(int i = 0 ; i < n ; i++){
+        visited[i] = false;
+    }
+
+    int count = 0;
+    for(int i =0 ;i < n ; i++){
+        if(!visited[i] ){
+            printCountHelper(edges, n , i, visited);
+            count++;
+        }
+    }
+    return count;
+
+}
+
+
 int main()
 {
     int n;
     int e;
     cin >> n >> e;
+    if(e == 0){
+		cout << n << endl;
+    }
+	else{
     int **edges = new int *[n];
     // creating a 2D matrix and initializing it by 0
     for (int i = 0; i < n; i++)
@@ -239,12 +273,12 @@ int main()
         edges[s][f] = 1; // (0,1) and (1,0) dono edges honge
     }
 
-    bool *visited = new bool[n];
+    // bool *visited = new bool[n];
 
-    for (int i = 0; i < n; i++)
-    {
-        visited[i] = false;
-    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     visited[i] = false;
+    // }
     // cout << "DFS " << endl;
     // DFS(edges, n);
     // cout << "BFS " << endl;
@@ -268,23 +302,27 @@ int main()
     //     cout << " No path found" << endl;
     // }
 
-        vector<vector<int>>* output = printConnected(edges, n, 0);
-    if (output != NULL)
-    {
-        for (int i = 0; i < output->size(); i++)
-        {
-            for(int j = 0 ; j < output[i]->size() ; i++){
-            cout << output[i][j] << " ";
-        }
-            cout << endl;
-        }
-    }
+    // vector<vector<int>>* output = printConnected(edges, n, 0);
+    // if (output != NULL)
+    // {
+    //     for (int i = 0; i < output->size(); i++)
+    //     {
+    //         for(int j = 0 ; j < output[i]->size() ; i++){
+    //         cout << output[i][j] << " ";
+    //     }
+    //         cout << endl;
+    //     }
+    // }
+
+     int  count = printCount(edges , n);
+    cout << count << endl;
+    } 
 
     //delete everything
 
-    for (int i = 0; i < n; i++)
-    {
-        delete[] edges[i];
-    }
-    delete[] edges;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     delete[] edges[i];
+    // }
+    // delete[] edges;
 }

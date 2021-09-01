@@ -619,3 +619,55 @@ edges[i][j] = 1  true
 toh 1 ke jagah hum yaha weight rakhenge  
 edges[i][j] = 5  
 
+
+# Islands
+
+same as the previous question.  
+count = 0  
+one func for dfs (startverex , n)   
+make adjecdency matrix  
+visited arry  
+another helper func (sv , n)  
+mark it visited  
+call on 1 ke adjecent  
+mark visited  
+ek connected component mila toh increase the count  
+
+adjecncy matrix  
+
+```C++ 
+#include <iostream>
+using namespace std;
+
+void printCountHelper(int **edges , int n , int sv ,int* visited){
+    visited[sv] = true;
+
+    for(int i = 0 ; i < n ; i++){
+        if(!visited[i] && edges[sv][i] == 1){
+            printCountHelper(edges , n , i , visited);
+        }
+    }
+}
+
+int printCount(int **edges, int n){
+
+    int *visited = new int[n];
+
+    for(int i = 0 ; i < n ; i++){
+        visited[i] = false;
+    }
+
+    int count = 0;
+    for(int i =0 ;i < n ; ++i){
+        if(!visited[i] ){
+            printCountHelper(edges, n , i, visited);
+            ++count;
+        }
+    }
+    return count;
+
+}
+```
+
+# Find CODING NINJAS
+
